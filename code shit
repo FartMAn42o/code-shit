@@ -1,0 +1,22 @@
+echo "# code-shit" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/FartMAn42o/code-shit.git
+git push -u origin main
+echo "# cool-epic" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/FartMAn42o/cool-epic.git
+git push -u origin main
+FROM python:3.9-slim
+COPY requirements.txt .
+RUN pip install --target=/app -r requirements.txt
+WORKDIR /app
+COPY action.yaml github_status_embed/
+COPY ./github_status_embed github_status_embed/
+ENV PYTHONPATH /app
+ENTRYPOINT ["python", "-m", "github_status_embed"]
